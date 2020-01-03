@@ -1,6 +1,22 @@
 name: Build and Deploy
 on: [push]
 jobs:
+    install-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
+      - name: Install and Test
+        run: |
+          npm
+          npm install
+        env:
+          CI: true
+     
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -13,3 +29,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: build # The folder the action should deploy.
+        BUILD_SCRIPT: npm run build
