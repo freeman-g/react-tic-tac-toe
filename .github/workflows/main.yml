@@ -11,6 +11,8 @@ jobs:
             node-version: ${{ matrix.node-version }}   
         - name: Install Packages
           run: npm install
+        - name: Commit files
+          run: git config --local user.email "blair@30platforms.com" & git config --local user.name "Blair G"
         - name: Deploy to GH Pages
           run: npm run deploy
         - name: Updating Domain
