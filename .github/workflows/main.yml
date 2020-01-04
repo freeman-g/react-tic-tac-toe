@@ -11,7 +11,9 @@ jobs:
             node-version: ${{ matrix.node-version }}
         - name: Install Packages
           run: npm install
+        - name: Build
+          run: npm run predeploy
         - name: Deploy to GH Pages
-          run: npm run build
+          run: npm run deploy
         - name: Updating Domain
           run: echo "Update domain"
